@@ -1,4 +1,4 @@
-from maingaspipeline.maingaspipeline import Pipeline
+from main_gas_pipeline.main_gas_pipeline import Pipeline
 
 pipe = Pipeline()
 pipe.a = 1

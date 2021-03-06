@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="maingaspipeline-buzovskyi-vitalii", # Replace with your own username
+    name="main_gas_pipeline", # Replace with your own username
     version="0.0.1",
     author="Buzovskyi Vitalii",
     author_email="buzovskiy.v@gmail.com",
