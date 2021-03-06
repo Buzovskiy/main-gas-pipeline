@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="main_gas_pipeline", # Replace with your own username
     version="0.0.1",
-    author="Buzovskyi Vitalii",
+    author="Buzovskyi Vitaliiy",
     author_email="buzovskiy.v@gmail.com",
     description="Main gas pipeline calculator",
     long_description=long_description,
