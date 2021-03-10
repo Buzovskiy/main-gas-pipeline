@@ -1,9 +1,14 @@
 from . import formula
+from .natural_gases import NaturalGas
 
 
 class Pipeline:
 
-    def __init__(self):
+    def __init__(self, natural_gas_title='shebelinka'):
+        self.natural_gas = NaturalGas(natural_gas_title)
+
+
+
         self.equivalent_roughness = None
         self.delta = None
         self.inner_diameter = None
@@ -29,7 +34,7 @@ class Pipeline:
         return formula.pressure_final(
             p0=self.pressure_initial,
             psr=self.pressure_medium,
-            pkr=self.pressure_critical,
+            pkr=self.natural_gas.pressure_pseudo_critical,
             Q=self.volume_flow_standard,
             Tsr=self.temperature_medium,
             Tkr=self.temperature_critical,
@@ -41,7 +46,7 @@ class Pipeline:
 
     def get_compressibility(self):
         return formula.ng_compressibility_factor(
-            pkr=self.pressure_critical,
+            pkr=self.natural_gas.pressure_pseudo_critical,
             tkr=self.temperature_critical,
             p=self.pressure_medium,
             t=self.temperature_medium
