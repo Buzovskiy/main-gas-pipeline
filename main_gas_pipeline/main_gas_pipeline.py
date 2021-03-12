@@ -6,7 +6,7 @@ class Pipeline:
 
     def __init__(self, natural_gas_title='shebelinka'):
         self.natural_gas = NaturalGas(natural_gas_title)
-
+        print(self.natural_gas.components[0].volume_percentage)
 
 
         self.equivalent_roughness = None
@@ -27,7 +27,7 @@ class Pipeline:
             pk = self.get_final_pressure_by_x(x)
             psr_calc = formula.pressure_medium(self.pressure_initial, pk)
             inaccuracy = abs(self.pressure_medium - psr_calc)
-            print(psr_calc)
+            # print(psr_calc)
         return pk
 
     def get_final_pressure_by_x(self, x):

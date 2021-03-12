@@ -9,7 +9,8 @@ def get_properties(title):
 
 class GasComponent:
 
-    def __init__(self, title):
+    def __init__(self, title, volume_percentage):
         self.density_standard = get_properties(title)['density_standard']
         self.density_normal = get_properties(title)['density_normal']
+        self.volume_percentage = volume_percentage
 
