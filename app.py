@@ -16,8 +16,8 @@ pipe.natural_gas_title = 'shebelinka'
 pipe.temperature_medium = pipe.temperature_initial
 
 
-pipe.delta = 0.62
-pipe.temperature_critical = 190.55  # Tkr
+# pipe.delta = 0.62
+# pipe.temperature_critical = 190.55  # Tkr
 # print(round(pipe.get_pressure_by_crd(70000)))
 
 rcParams['font.family'] = 'fantasy'
@@ -42,6 +42,7 @@ for _x in range(0, 51000, 1000):
         pk = pipe.get_pressure_by_crd(1000)
         y.append(round(pk))
         pipe.pressure_initial = pk
+        print(pk)
 plt.plot(x, y, label="b")
 plt.ylabel('P, Pa')
 plt.xlabel('x, m')
