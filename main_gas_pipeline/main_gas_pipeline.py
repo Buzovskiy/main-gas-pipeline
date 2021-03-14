@@ -4,15 +4,17 @@ from .natural_gases import NaturalGas
 
 class Pipeline:
 
-    def __init__(self, natural_gas_title='shebelinka'):
+    def __init__(self, pressure_initial, volume_flow_standard, equivalent_roughness, inner_diameter,
+                 temperature_initial, natural_gas_title='shebelinka'):
         # self.natural_gas = NaturalGas(natural_gas_title)
         self.natural_gas_title = natural_gas_title
+        self.pressure_initial = pressure_initial
+        self.volume_flow_standard = volume_flow_standard
+        self.equivalent_roughness = equivalent_roughness
+        self.inner_diameter = inner_diameter
+        self.temperature_initial = temperature_initial
+        self.temperature_medium = temperature_initial
 
-        self.equivalent_roughness = None
-        self.inner_diameter = None
-        self.temperature_medium = None
-        self.volume_flow_standard = None
-        self.pressure_initial = None
         self.pressure_medium = None
         self.natural_gas = None
 

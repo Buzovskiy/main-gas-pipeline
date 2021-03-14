@@ -5,15 +5,13 @@ from main_gas_pipeline.main_gas_pipeline import Pipeline
 from main_gas_pipeline import formula
 
 pipe = Pipeline(
-    natural_gas_title='shebelinka'
+    natural_gas_title='shebelinka',
+    pressure_initial=6 * 10 ** 6,  # p0
+    volume_flow_standard=30 * 10 ** 6 / (24 * 60 * 60),  # Qk
+    equivalent_roughness=0.03 * 10 ** -3,  # k
+    inner_diameter=1000 * 10 ** -3,  # d
+    temperature_initial=313  # T0
 )
-pipe.pressure_initial = 6 * 10 ** 6  # p0
-pipe.volume_flow_standard = 30 * 10 ** 6 / (24 * 60 * 60)  # Qk
-pipe.equivalent_roughness = 0.03 * 10 ** -3  # k
-pipe.inner_diameter = 1000 * 10 ** -3  # d
-pipe.temperature_initial = 313  # T0
-pipe.natural_gas_title = 'shebelinka'
-pipe.temperature_medium = pipe.temperature_initial
 
 
 # pipe.delta = 0.62
