@@ -19,7 +19,8 @@ class Pipeline:
         self.natural_gas = None
 
     def get_pressure_by_crd(self, x):
-        psr_calc = pk = 0
+        psr_calc = self.pressure_initial
+        pk = 0
         inaccuracy = 1
         while inaccuracy > 0.001:
             self.pressure_medium = psr_calc
