@@ -11,7 +11,8 @@ pipe = Pipeline(
     volume_flow_standard=30 * 10 ** 6 / (24 * 60 * 60),  # Qk
     equivalent_roughness=0.03 * 10 ** -3,  # k
     inner_diameter=1000 * 10 ** -3,  # d
-    temperature_initial=313  # T0
+    temperature_initial=313,  # T0
+    temperature_soil=12+273,
 )
 
 
@@ -30,11 +31,15 @@ rcParams['font.fantasy'] = 'Arial'
 # pk = pipe.get_final_pressure_by_x(30000)
 # print(pk)
 # exit(pipe.get_pressure_by_crd(30000))
+# pipe.get_pressure_by_crd(30000)
+# exit(pipe.mass_flow)
+
+
 temperature = lambda x: formula.temperature_final(x, Ksr=1.75, d=1.2, M=0.62*Constants.density_standard_air*32e6/(24*60*60), Cp=2500, Tgr=273, T0=303, Ddj=0.3, p0=6, pk=3.5)
 for t in [x*1e3 for x in [20, 40, 60, 80, 100, 120, 140]]:
     print(temperature(t)-273)
 
-exit(formula.temperature_medium(20e3, Ksr=1.75, d=1.2, M=0.62*Constants.density_standard_air*32e6/(24*60*60), Cp=2500, Tgr=273, T0=303, Ddj=0.3, p0=6, pk=3.5)-273)
+#exit(formula.temperature_medium(20e3, Ksr=1.75, d=1.2, M=0.62*Constants.density_standard_air*32e6/(24*60*60), Cp=2500, Tgr=273, T0=303, Ddj=0.3, p0=6, pk=3.5)-273)
 
 
 
