@@ -1,4 +1,3 @@
-from . import formula
 from .natural_gases import NaturalGas
 
 
@@ -16,6 +15,7 @@ class Pipeline:
         self.temperature_initial = temperature_initial
         self.temperature_soil = temperature_soil
         self.temperature_medium = temperature_initial
+
 
         self.pressure_medium = None
 
@@ -35,7 +35,7 @@ class Pipeline:
         return pk
 
     def get_final_pressure_by_x(self, x):
-        return formula.pressure_final(
+        return formula.pipeline.pressure_final(
             p0=self.pressure_initial,
             psr=self.pressure_medium,
             Q=self.volume_flow_standard,
@@ -68,16 +68,3 @@ class Pipeline:
     def mass_flow(self):
         return self.volume_flow_standard * self.natural_gas.density_standard
 
-    # def get_compressibility(self):
-    #     return formula.ng_compressibility_factor(
-    #         pkr=self.natural_gas.pressure_pseudo_critical,
-    #         tkr=self.temperature_critical,
-    #         p=self.pressure_medium,
-    #         t=self.temperature_medium
-    #     )
-
-    # @property
-    # def drag_coefficient(self):
-    #     """Hydraulic drag coefficient"""
-    #     Eh = 0.95
-    #     return (1.05 * Eh ** 2) * 0.067 * (158/self.Reynolds + 2 * self.)

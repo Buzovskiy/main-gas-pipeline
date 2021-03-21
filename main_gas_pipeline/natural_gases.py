@@ -1,6 +1,7 @@
 # python -m main_gas_pipeline.natural_gases
 from .gas_components import GasComponent
 from .constants import Constants
+from .formula import natural_gas as f_natural_gas
 
 
 class NaturalGas:
@@ -14,69 +15,64 @@ class NaturalGas:
     @property
     def density_standard(self):
         """Natural gas density at standard temperature, kg/m3"""
-        density_standard = 0
-        for component in self.components:
-            density_standard += component.density_standard * component.volume_percentage * 0.01
-        return density_standard
+        return f_natural_gas.density_standard(components=self.components)
 
     @property
     def molar_mass(self):
         """Natural gas molar mass, kg/kmole"""
-        molar_mass = 0
-        for component in self.components:
-            molar_mass += component.molar_mass * component.volume_percentage * 0.01
-        return molar_mass
+        return f_natural_gas.molar_mass(components=self.components)
 
     @property
     def gas_constant(self):
         """Gas constant of natural gas, J/(kg*K)"""
-        return Constants.gas_constant / self.molar_mass
+        return f_natural_gas.gas_constant(R=Constants.gas_constant, mu=self.molar_mass)
 
     @property
     def temperature_pseudocritical(self):
         """Natural gas pseudocritical temperature (CH4 > 85%), K"""
-        return 155.24 * (0.564 + self.density_standard)
+        return f_natural_gas.temperature_pseudocritical(ro_st=self.density_standard)
 
     @property
     def pressure_pseudocritical(self):
         """Natural gas pseudocritical pressure (CH4 > 85%), MPa"""
-        return 0.1737 * (26.831 - self.density_standard)
+        return f_natural_gas.pressure_pseudocritical(ro_st=self.density_standard)
 
     @property
     def density_relative(self):
         """Natural gas density relative to standard air density"""
-        return self.density_standard / Constants.density_standard_air
+        return f_natural_gas.density_relative(ro_st=self.density_standard, ro_air_st=Constants.density_standard_air)
 
     @property
     def pressure_reduced(self):
-        return self.pressure * 10**-6 / self.pressure_pseudocritical
+        """Reduced pressure of the natural gas, dimensionless"""
+        return f_natural_gas.pressure_reduced(p=self.pressure, p_pkr=self.pressure_pseudocritical)
 
     @property
     def temperature_reduced(self):
-        return self.temperature / self.temperature_pseudocritical
+        """Reduced temperature of the natural gas, dimensionless"""
+        return f_natural_gas.temperature_reduced(t=self.temperature, t_pkr=self.temperature_pseudocritical)
 
     @property
     def compressibility_factor(self):
-        tau = 1 - 1.68 * self.temperature_reduced + 0.78 * self.temperature_reduced**2 + \
-              0.0107 * self.temperature_reduced**3
-        return 1 - 0.0241 * self.pressure_reduced / tau
+        """Compressibility factor, dimensionless"""
+        return f_natural_gas.compressibility_factor(t_pr=self.temperature_reduced, p_pr=self.pressure_reduced)
 
     @property
-    def specific_heat_capacity(self):
+    def specific_isobaric_heat_capacity(self):
         """Isobar specific heat capacity Cp kJ/(kg*K)"""
-        return 1.695 + 1.838 * 10**-3 * self.temperature + 1.96 * 10**6 * \
-               (self.pressure * 10**-6 - 0.1) / self.temperature**3
+        return f_natural_gas.specific_isobaric_heat_capacity(p=self.pressure, t=self.temperature)
 
     @property
     def joile_tomson_factor(self):
         """Joile-Tomson factor Di (K/MPa)"""
-        return (1 / self.specific_heat_capacity) * (0.98 * 10**6 / self.temperature**2 - 1.5)
+        return f_natural_gas.joile_tomson_factor(Cp=self.specific_isobaric_heat_capacity, t=self.temperature)
 
     @property
     def viscosity_dynamic(self):
-        return 5.1 * 10**-6 * (1 + self.density_standard * (1.1 - 0.25 * self.density_standard)) * \
-               (0.037 + self.temperature_reduced * (1 - 0.104 * self.temperature_reduced)) * \
-               (1 + self.pressure_reduced**2 / (30 * (self.temperature_reduced - 1)))
+        """Dynamic viscosity of the natural gas, Pa*s"""
+        return f_natural_gas.viscosity_dynamic(ro_st=self.density_standard,
+                                               T_pr=self.temperature_reduced,
+                                               p_pr=self.pressure_reduced)
 
 
 
