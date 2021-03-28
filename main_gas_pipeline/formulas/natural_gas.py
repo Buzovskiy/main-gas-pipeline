@@ -100,18 +100,18 @@ def specific_isobaric_heat_capacity(p, t):
     """
     :param p: (float) Absolute pressure of the natural gas, Pa
     :param t: (float) Temperature of the natural gas, K
-    :return: (float) Isobaric specific heat capacity Cp kJ/(kg*K)
+    :return: (float) Isobaric specific heat capacity Cp J/(kg*K)
     """
-    return 1.695 + 1.838 * 10**-3 * t + 1.96 * 10**6 * (p * 10**-6 - 0.1) / t**3
+    return (1.695 + 1.838 * 10**-3 * t + 1.96 * 10**6 * (p * 10**-6 - 0.1) / t**3) * 1e3
 
 
 def joile_tomson_factor(Cp, t):
     """
-    :param Cp: (float) Isobaric specific heat capacity Cp kJ/(kg*K)
+    :param Cp: (float) Isobaric specific heat capacity Cp J/(kg*K)
     :param t: (float) Temperature of the natural gas, K
     :return: (float) Joile-Tomson factor Di (K/MPa)
     """
-    return (1 / Cp) * (0.98e6 / t**2 - 1.5)
+    return (1 / (Cp*1e-3)) * (0.98e6 / t**2 - 1.5)
 
 
 def viscosity_dynamic(ro_st, T_pr, p_pr):

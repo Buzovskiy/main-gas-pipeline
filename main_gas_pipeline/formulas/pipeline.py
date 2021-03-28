@@ -2,6 +2,14 @@ import math
 # from .constants import Constants as const
 
 
+def cross_sectional_area(d):
+    """
+    :param d: Inner diameter of a pipe, m
+    :return: Cross sectional area, m2
+    """
+    return math.pi * d**2 / 4
+
+
 def hydraulic_resistance_coefficient(Eg, Re, ke, d):
     """
     :param Eg: Coefficient of hydraulic efficiency. If no data: Eg=0.95 for pipelines with scraper system; Eg=0.92 for
@@ -31,6 +39,17 @@ def velocity(Q, S):
     :return: Velocity of the natural gas, m/s
     """
     return Q/S
+
+
+def volume_flow(p, G, R, T, Z):
+    """
+    :param p: Absolute pressure, Pa
+    :param G: Mass flow, kg/s
+    :param R: Gas constant, J/(kg*K)
+    :param Z: Compressibility factor
+    :return: Volume flow of the natural gas, m3/s
+    """
+    return Z * G * R * T / p
 
 
 def inner_diameter(D, delta):
@@ -141,3 +160,15 @@ def soil_air_heat_transfer(Vw):
     :return: Soil-air heat transfer coefficient, W/(m2*K)
     """
     return 6.2 + 4.2*Vw
+
+
+def isolation_thermal_resistance(D, lambda_is, delta):
+    """
+    :param D: Outer diameter of pipeline or diameter of the last layer if pipeline has many
+    layers of isolation, m
+    :param lambda_is: heat conductivity of isolation, W/(m*K)
+    :param delta: Thickness of isolation, m
+    :return: Thermal resistance of isolation, (m2*K/W)
+    """
+    Dis = D + 2*delta
+    return D/(2*lambda_is) * math.log(Dis/D)

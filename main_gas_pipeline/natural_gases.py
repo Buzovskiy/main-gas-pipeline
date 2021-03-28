@@ -1,7 +1,7 @@
 # python -m main_gas_pipeline.natural_gases
 from .gas_components import GasComponent
 from .constants import Constants
-from .formula import natural_gas as f_natural_gas
+from .formulas import natural_gas as f_natural_gas
 
 
 class NaturalGas:
@@ -16,6 +16,16 @@ class NaturalGas:
     def density_standard(self):
         """Natural gas density at standard temperature, kg/m3"""
         return f_natural_gas.density_standard(components=self.components)
+
+    @property
+    def density(self):
+        """Natural gas density, kg/m3"""
+        return f_natural_gas.density(
+            p=self.pressure,
+            Z=self.compressibility_factor,
+            R=self.gas_constant,
+            T=self.temperature
+        )
 
     @property
     def molar_mass(self):
@@ -59,7 +69,7 @@ class NaturalGas:
 
     @property
     def specific_isobaric_heat_capacity(self):
-        """Isobar specific heat capacity Cp kJ/(kg*K)"""
+        """Isobar specific heat capacity Cp J/(kg*K)"""
         return f_natural_gas.specific_isobaric_heat_capacity(p=self.pressure, t=self.temperature)
 
     @property
@@ -73,6 +83,14 @@ class NaturalGas:
         return f_natural_gas.viscosity_dynamic(ro_st=self.density_standard,
                                                T_pr=self.temperature_reduced,
                                                p_pr=self.pressure_reduced)
+
+    @property
+    def viscosity_kinematic(self):
+        """Natural gas kinematic viscosity, m2/s"""
+        return f_natural_gas.viscosity_kinematic(
+            mu=self.viscosity_dynamic,
+            ro=self.density
+        )
 
 
 
