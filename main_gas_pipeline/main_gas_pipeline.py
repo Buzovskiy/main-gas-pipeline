@@ -184,7 +184,7 @@ class Pipeline:
 
     @property
     def cross_sectional_area(self):
-        """:returns: Volume flow of the natural gas, m3/s"""
+        """:returns: Cross sectional area, m2"""
         return f_pipeline.cross_sectional_area(self.inner_diameter)
 
     @property
@@ -202,7 +202,7 @@ class Pipeline:
 
     @property
     def equivalent_depth(self):
-        """:return: equivalent depth, m"""
+        """:return: Equivalent depth, m"""
         return f_pipeline.equivalent_depth(
             self.pipeline_depth,
             self.soil_heat_conductivity,
@@ -222,6 +222,7 @@ class Pipeline:
 
     @property
     def heat_transfer_coefficient(self):
+        """:return: Overall heat transfer coefficient, W/(m2*K)"""
         return f_pipeline.heat_transfer_coefficient(
             self.isolation_thermal_resistance,
             self.pipe_soil_heat_transfer

@@ -93,10 +93,21 @@ class NaturalGas:
         )
 
 
-
 def ng_components(component):
+    """
+        Dudlya M.A. D81 Protsesy pidzemnoho zberihannya hazu [Tekst]: pidruchnyk / M.A. Dudlya, L.M. Shyrin, E.A. Fedorenko.
+        – D.: Natsionalʹnyy hirnychyy universytet, 2012. – 412 s. [page 51].
+    """
     return {
-        'shebelinka': [GasComponent('CH4', 94.1), GasComponent('C2H6', 3.1)]
+        'shebelinka': [
+            GasComponent('methane', 92),
+            GasComponent('ethane', 4),
+            GasComponent('propane', 1.1),
+            GasComponent('butane', 0.52),
+            GasComponent('pentane', 0.26),
+            GasComponent('nitrogen', 2),
+            GasComponent('carbon_dioxide', 0.12),
+        ]
     }[component]
 
 
