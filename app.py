@@ -80,6 +80,7 @@ y_Cp = [pipe.natural_gas.specific_isobaric_heat_capacity]
 y_Dj = [pipe.natural_gas.joile_tomson_factor]
 y_mu = [pipe.natural_gas.viscosity_dynamic]
 y_nu = [pipe.natural_gas.viscosity_kinematic]
+y_soil_lambda = [pipe.soil_heat_conductivity]
 
 for _x in range(0, int(1.5e5), 1000):
     if _x != 0:
@@ -119,6 +120,8 @@ for _x in range(0, int(1.5e5), 1000):
         y_mu.append(pipe.natural_gas.viscosity_dynamic)
         # Natural gas kinematic viscosity, m2/s
         y_nu.append(pipe.natural_gas.viscosity_kinematic)
+        # Heat conductivity of a soil, W/(m2*K)
+        y_soil_lambda.append(pipe.soil_heat_conductivity)
 
 # fig = plt.figure()
 # fig.patch.set_facecolor('xkcd:mint green')
@@ -231,6 +234,13 @@ axes['ax14'].plot(x, y_nu, label="Viscosity kinematic")
 axes['ax14'].set_ylabel(r"$\nu,$" +"\n"+r"$\frac{m^2}{s}$", rotation=0, labelpad=13)
 axes['ax14'].set_xlabel('x, km')
 
+graph_ind += 1
+# Heat conductivity of a soil, W/(m2*K)
+axes['ax15'] = fig.add_subplot(rows, cols, graph_ind)
+axes['ax15'].plot(x, y_soil_lambda, label="Heat conductivity of a soil")
+axes['ax15'].set_ylabel(r"$\mathrm{\lambda}_{soil}$," +"\n"+r"$\frac{W}{m^2 \cdot K}$", rotation=0, labelpad=13)
+axes['ax15'].set_xlabel('x, km')
+
 for ax in axes:
     axes[ax].grid(True)
     axes[ax].legend()
@@ -254,8 +264,8 @@ fig = plt.gcf()
 cm = 1/2.54
 fig.set_size_inches(45*cm, 40*cm)
 # figure(figsize=())
-plt.savefig('parameters.jpg', dpi=700)
-
+# plt.savefig('parameters.jpg', dpi=700)
+plt.show()
 exit()
 
 

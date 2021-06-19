@@ -11,11 +11,13 @@ pipe = Pipeline(
     hydraulic_efficiency=0.95,
     wind_velocity=2,
     pipeline_depth=1.5,
-    soil_heat_conductivity=1.5,
     isolation_heat_conductivity=0.1,
     isolation_thickness=10e-3,
     snow_thickness=0,
     snow_heat_conductivity=0.1,
     temperature_soil=12+273,
     natural_gas_title='shebelinka',
+    soil_type='mixed_soil',
+    soil_humidity=10,
+    soil_density=1500
 )

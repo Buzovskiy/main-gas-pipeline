@@ -172,3 +172,20 @@ def isolation_thermal_resistance(D, lambda_is, delta):
     """
     Dis = D + 2*delta
     return D/(2*lambda_is) * math.log(Dis/D)
+
+
+def soil_heat_conductivity(w, T, ro, soil_type):
+    """
+    Heat conductivity of a soil, W/(m2*K)
+    :param w: humidity, %
+    :param T: temperature, K
+    :param ro: density of a soil, kg/m3
+    :param soil_type: (str) type of a soil
+    :return: heat conductivity of a soil, W/(m2*K)
+    """
+    ro = ro / 1000
+    return {
+        'sand': 10**((-134.2 + 23.89*w - 2.389*T + 442.98*ro - 0.276*w**2)*1e-3),
+        'loam': 10**((-711.8 + 8.25*w + 2.48*T - 17.2*ro)*1e-3),
+        'mixed_soil': 10**((-920.27 + 13.9 * w + 3.26 * T + 18.6 * ro - 0.36 * w**2)*1e-3),
+    }[soil_type.lower()]

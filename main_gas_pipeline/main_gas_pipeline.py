@@ -15,13 +15,15 @@ class Pipeline:
             hydraulic_efficiency,
             wind_velocity,
             pipeline_depth,
-            soil_heat_conductivity,
             isolation_heat_conductivity,
             isolation_thickness,
             snow_thickness,
             snow_heat_conductivity,
             temperature_soil,
-            natural_gas_title='shebelinka'
+            natural_gas_title='shebelinka',
+            soil_type='mixed_soil',
+            soil_humidity=10,
+            soil_density=1500,
     ):
 
         self.pressure_initial = pressure_initial
@@ -33,12 +35,14 @@ class Pipeline:
         self.hydraulic_efficiency = hydraulic_efficiency
         self.wind_velocity = wind_velocity
         self.pipeline_depth = pipeline_depth
-        self.soil_heat_conductivity = soil_heat_conductivity
         self.isolation_heat_conductivity = isolation_heat_conductivity
         self.isolation_thickness = isolation_thickness
         self.snow_thickness = snow_thickness
         self.snow_heat_conductivity = snow_heat_conductivity
         self.temperature_soil = temperature_soil
+        self.soil_type = soil_type
+        self.soil_humidity = soil_humidity
+        self.soil_density = soil_density
 
         self._pressure_medium = pressure_initial
         self._temperature_medium = temperature_initial
@@ -73,14 +77,10 @@ class Pipeline:
         tsr_calc = self.temperature_initial
         pk = 0
         inaccuracy_p = 1
-        inaccuracy_t = 1e-4
+        inaccuracy_t = 1
         while inaccuracy_p > 0.001 or inaccuracy_t > 0.001:
             self.pressure_medium = psr_calc
             self.temperature_medium = tsr_calc
-            # print(self.pressure_initial)
-            # self.natural_gas = NaturalGas(self.natural_gas_title, self.temperature_medium, self.pressure_medium)
-            # self.natural_gas.temperature = self.temperature_medium
-            # self.natural_gas.pressure = self.pressure_medium
             pk = self.get_final_pressure_by_x(x)
             psr_calc = f_pipeline.pressure_medium(self.pressure_initial, pk)
             inaccuracy_p = abs(self.pressure_medium - psr_calc)
@@ -170,7 +170,6 @@ class Pipeline:
             S=self.cross_sectional_area
         )
 
-
     @property
     def volume_flow(self):
         """:returns: Volume flow of the natural gas, m3/s"""
@@ -218,6 +217,16 @@ class Pipeline:
             self.soil_heat_conductivity,
             self.outer_diameter,
             self.equivalent_depth
+        )
+
+    @property
+    def soil_heat_conductivity(self):
+        """:return: Heat conductivity of a soil, W/(m2*K)"""
+        return f_pipeline.soil_heat_conductivity(
+            self.soil_humidity,
+            self.temperature_soil,
+            self.soil_density,
+            self.soil_type,
         )
 
     @property
