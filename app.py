@@ -138,7 +138,6 @@ axes = {}
 graph_ind = 1
 axes['ax1'] = fig.add_subplot(rows, cols, graph_ind)
 axes['ax1'].plot(x, y_pk, label="Natural gas pressure")
-# axes['ax1'].plot(x, y_psr, label="Natural gas pressure medium")
 axes['ax1'].set_ylabel('P, MPa')
 axes['ax1'].set_xlabel('x, km')
 
@@ -146,7 +145,6 @@ graph_ind += 1
 # График изменения температуры газа по длине трубопровода
 axes['ax2'] = fig.add_subplot(rows, cols, graph_ind)
 axes['ax2'].plot(x, y_tk, label="Natural gas temperature")
-# axes['ax2'].plot(x, y_tsr, label="Natural gas medium temperature")
 axes['ax2'].set_ylabel('T, K')
 axes['ax2'].set_xlabel('x, km')
 
