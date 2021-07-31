@@ -84,7 +84,7 @@ for t_gr in t_gr_list:
         arrowprops=dict(arrowstyle='-', ls='-', shrinkA=0, shrinkB=0, lw=0.6)
     )
 
-a4x = fsolve(t_gas_func_x[0] - (pipe.temperature_soil), 0)
+a4x = fsolve(t_gas_func_x[0] - pipe.temperature_soil, 0)
 a4y = pipe.temperature_soil-273
 ax.annotate(r"$\mathrm{a_{4}}$", xy=(a4x, a4y), xytext=(a4x*0.8, a4y+1),
             arrowprops=dict(arrowstyle='-', ls='-', shrinkA=0, shrinkB=0, lw=0.6),
