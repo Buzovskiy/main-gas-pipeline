@@ -5,14 +5,14 @@ with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="major-gas-pipeline",
+    name="main-gas-pipeline",
     version="0.0.1",
     author="Buzovskyi Vitaliiy",
     author_email="buzovskiy.v@gmail.com",
-    description="Major gas pipeline calculator",
+    description="Main gas pipeline calculator",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Buzovskiy/major-gas-pipeline",
+    url="https://github.com/Buzovskiy/main-gas-pipeline",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

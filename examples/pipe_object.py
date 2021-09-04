@@ -1,4 +1,4 @@
-import major_gas_pipeline as mgp
+import main_gas_pipeline as mgp
 
 
 pipe = mgp.Pipeline(
