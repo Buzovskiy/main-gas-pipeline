@@ -1,7 +1,7 @@
 import setuptools
 
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -21,9 +21,4 @@ setuptools.setup(
     ],
     include_package_data=True,
     python_requires='>=3.8',
-    # install_requires=['openpyxl'],
-    # cmdclass={
-    #     'develop': PostDevelopCommand,
-    #     'install': PostInstallCommand,
-    # },
 )

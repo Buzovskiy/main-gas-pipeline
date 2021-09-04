@@ -1,7 +1,7 @@
-from major_gas_pipeline.main_gas_pipeline import Pipeline
+import major_gas_pipeline as mgp
 
 
-pipe = Pipeline(
+pipe = mgp.Pipeline(
     pressure_initial=6e6,  # p0
     volume_flow_standard=30e6 / (24 * 60 * 60),  # Qk
     equivalent_roughness=0.03e-3,  # k
@@ -21,3 +21,5 @@ pipe = Pipeline(
     soil_humidity=10,
     soil_density=1500
 )
+
+print(pipe)
