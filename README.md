@@ -1,4 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/main-gas-pipeline/badge/?version=v0.0.2)](https://main-gas-pipeline.readthedocs.io/en/v0.0.2/?badge=v0.0.2)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5504422.svg)](https://doi.org/10.5281/zenodo.5504422)
 
 # Main gas pipelines calculations
 
